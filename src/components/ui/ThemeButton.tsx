@@ -27,9 +27,12 @@ const ThemeButton = () => {
       exit={{ opacity: 0 }}
       whileTap={{ scale: 0.9 }}
       onClick={toggleTheme}
-      className="fixed bottom-5 right-5 z-50 p-3 rounded-full glass shadow-md"
+      className="fixed bottom-5 right-5 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg border border-purple-100 dark:border-purple-900"
     >
-      {isDark ? <Sun size={20} /> : <Moon size={20} />}
+      {isDark ? 
+        <Sun size={20} className="text-yellow-500" /> : 
+        <Moon size={20} className="text-purple-600" />
+      }
     </motion.button>
   );
 };

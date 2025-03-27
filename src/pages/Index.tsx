@@ -7,12 +7,12 @@ import ThemeButton from "@/components/ui/ThemeButton";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-purple-900">
       <Header />
       <ThemeButton />
       
-      <main className="flex-1 container max-w-5xl mx-auto px-4 pt-24 pb-16">
-        <div className="flex flex-col items-center justify-center space-y-8 max-w-xl mx-auto">
+      <main className="flex-1 container max-w-5xl mx-auto px-4 pt-28 pb-16 flex flex-col">
+        <div className="flex flex-col items-center justify-between h-full space-y-8">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -23,7 +23,7 @@ const Index = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="rounded-full px-3 py-1 text-xs font-medium bg-primary/10 text-primary inline-block"
+              className="rounded-full px-3 py-1 text-xs font-medium bg-purple-500/10 text-purple-600 dark:text-purple-300 inline-block"
             >
               Connect with friends
             </motion.div>
@@ -32,7 +32,7 @@ const Index = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="text-4xl font-bold tracking-tight"
+              className="text-4xl font-bold tracking-tight bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text"
             >
               Send an invitation
             </motion.h1>
@@ -47,14 +47,7 @@ const Index = () => {
             </motion.p>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="w-full p-6 rounded-2xl glass-card"
-          >
-            <InviteForm />
-          </motion.div>
+          <InviteForm />
         </div>
       </main>
       
@@ -62,7 +55,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.5 }}
-        className="py-6 border-t"
+        className="py-6 border-t bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm"
       >
         <div className="container max-w-5xl mx-auto px-4 text-center text-sm text-muted-foreground">
           Invite App — Connect with friends seamlessly

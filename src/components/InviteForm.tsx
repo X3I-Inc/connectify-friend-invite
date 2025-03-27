@@ -63,9 +63,22 @@ const InviteForm = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
-      className="w-full max-w-md mx-auto"
+      className="w-full flex flex-col items-center justify-between h-full"
     >
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <motion.button
+        type="button"
+        onClick={() => document.getElementById("invite-form")?.scrollIntoView({ behavior: "smooth" })}
+        className={cn(
+          "w-64 h-64 rounded-full flex items-center justify-center text-3xl font-bold text-white",
+          "bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30",
+          "hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
+        )}
+        {...buttonHoverAnimation}
+      >
+        Invite
+      </motion.button>
+      
+      <form id="invite-form" onSubmit={handleSubmit} className="w-full max-w-lg mt-16 space-y-6">
         <div className="space-y-4">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -153,13 +166,13 @@ const InviteForm = () => {
           type="submit"
           className={cn(
             "w-full py-4 rounded-xl font-medium text-white",
-            "bg-primary shadow-lg shadow-primary/25",
+            "bg-gradient-to-r from-pink-500 to-orange-500 shadow-lg shadow-pink-500/25",
             "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-            "transition-all duration-200"
+            "transition-all duration-300"
           )}
           {...buttonHoverAnimation}
         >
-          Invite
+          Send Invitation
         </motion.button>
       </form>
     </motion.div>
