@@ -72,10 +72,36 @@ const InviteForm = () => {
       >
         <motion.button
           type="button"
-          onClick={() => document.getElementById("invite-form")?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() => {
+            if (!formData.friend) {
+              toast.error("Please select a friend to invite");
+              return;
+            }
+            
+            if (!formData.time) {
+              toast.error("Please specify a time for the meetup");
+              return;
+            }
+            
+            if (!formData.place) {
+              toast.error("Please specify a place for the meetup");
+              return;
+            }
+            
+            // Form is valid, show success toast
+            toast.success(`Invitation sent to ${formData.friend.name}!`);
+            
+            // Reset form
+            setFormData({
+              friend: null,
+              time: "",
+              place: "",
+              comment: "",
+            });
+          }}
           className={cn(
             "w-32 h-32 rounded-full flex items-center justify-center text-xl font-bold text-white",
-            "bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30",
+            "bg-gradient-to-r from-pink-500 to-orange-500 shadow-lg shadow-pink-500/25",
             "hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
           )}
           {...buttonHoverAnimation}
@@ -169,19 +195,6 @@ const InviteForm = () => {
             />
           </motion.div>
         </div>
-
-        <motion.button
-          type="submit"
-          className={cn(
-            "w-full py-3 rounded-xl font-medium text-white",
-            "bg-gradient-to-r from-pink-500 to-orange-500 shadow-lg shadow-pink-500/25",
-            "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-            "transition-all duration-300 text-sm"
-          )}
-          {...buttonHoverAnimation}
-        >
-          Send Invitation
-        </motion.button>
       </form>
     </motion.div>
   );
