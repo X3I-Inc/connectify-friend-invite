@@ -7,6 +7,7 @@ import { Friend } from "@/utils/friends";
 import FriendSelect from "./FriendSelect";
 import { cn } from "@/lib/utils";
 import { buttonHoverAnimation } from "@/utils/animations";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FormData {
   friend: Friend | null;
@@ -22,6 +23,7 @@ const InviteForm = () => {
     place: "",
     comment: "",
   });
+  const isMobile = useIsMobile();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,78 +67,84 @@ const InviteForm = () => {
       transition={{ duration: 0.4, delay: 0.1 }}
       className="w-full flex flex-col items-center justify-between h-full"
     >
-      <motion.button
-        type="button"
-        onClick={() => document.getElementById("invite-form")?.scrollIntoView({ behavior: "smooth" })}
-        className={cn(
-          "w-64 h-64 rounded-full flex items-center justify-center text-3xl font-bold text-white",
-          "bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30",
-          "hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
-        )}
-        {...buttonHoverAnimation}
+      <motion.div 
+        className="flex flex-col items-center justify-center"
       >
-        Invite
-      </motion.button>
+        <motion.button
+          type="button"
+          onClick={() => document.getElementById("invite-form")?.scrollIntoView({ behavior: "smooth" })}
+          className={cn(
+            "w-32 h-32 rounded-full flex items-center justify-center text-xl font-bold text-white",
+            "bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30",
+            "hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
+          )}
+          {...buttonHoverAnimation}
+        >
+          Invite
+        </motion.button>
+      </motion.div>
       
-      <form id="invite-form" onSubmit={handleSubmit} className="w-full max-w-lg mt-16 space-y-6">
-        <div className="space-y-4">
+      <form id="invite-form" onSubmit={handleSubmit} className="w-full max-w-lg mt-6 space-y-3">
+        <div className="space-y-3">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <p className="text-sm font-medium mb-2 text-muted-foreground">Who do you want to meet?</p>
+            <p className="text-sm font-medium mb-1 text-muted-foreground">Who do you want to meet?</p>
             <FriendSelect 
               value={formData.friend} 
               onSelect={(friend) => setFormData((prev) => ({ ...prev, friend }))} 
             />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.3 }}
-            className="relative"
-          >
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
-              <Clock className="h-5 w-5 text-muted-foreground" />
-            </div>
-            <input
-              type="datetime-local"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-              className={cn(
-                "w-full pl-12 pr-4 py-3 rounded-xl border bg-background",
-                "focus:outline-none focus:ring-2 focus:ring-primary",
-                "transition-all duration-200"
-              )}
-              placeholder="Select time"
-            />
-          </motion.div>
+          <div className="grid grid-cols-2 gap-3">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+              className="relative"
+            >
+              <div className="absolute left-3 top-1/2 -translate-y-1/2">
+                <Clock className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <input
+                type="datetime-local"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+                className={cn(
+                  "w-full pl-9 pr-2 py-2 rounded-xl border bg-background",
+                  "focus:outline-none focus:ring-2 focus:ring-primary",
+                  "transition-all duration-200 text-sm"
+                )}
+                placeholder="Select time"
+              />
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.4 }}
-            className="relative"
-          >
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
-              <MapPin className="h-5 w-5 text-muted-foreground" />
-            </div>
-            <input
-              type="text"
-              name="place"
-              value={formData.place}
-              onChange={handleChange}
-              className={cn(
-                "w-full pl-12 pr-4 py-3 rounded-xl border bg-background",
-                "focus:outline-none focus:ring-2 focus:ring-primary",
-                "transition-all duration-200"
-              )}
-              placeholder="Where to meet?"
-            />
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.4 }}
+              className="relative"
+            >
+              <div className="absolute left-3 top-1/2 -translate-y-1/2">
+                <MapPin className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <input
+                type="text"
+                name="place"
+                value={formData.place}
+                onChange={handleChange}
+                className={cn(
+                  "w-full pl-9 pr-2 py-2 rounded-xl border bg-background",
+                  "focus:outline-none focus:ring-2 focus:ring-primary",
+                  "transition-all duration-200 text-sm"
+                )}
+                placeholder="Where?"
+              />
+            </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -144,18 +152,18 @@ const InviteForm = () => {
             transition={{ duration: 0.3, delay: 0.5 }}
             className="relative"
           >
-            <div className="absolute left-4 top-4">
-              <MessageSquare className="h-5 w-5 text-muted-foreground" />
+            <div className="absolute left-3 top-3">
+              <MessageSquare className="h-4 w-4 text-muted-foreground" />
             </div>
             <textarea
               name="comment"
               value={formData.comment}
               onChange={handleChange}
-              rows={3}
+              rows={2}
               className={cn(
-                "w-full pl-12 pr-4 py-3 rounded-xl border bg-background",
+                "w-full pl-9 pr-2 py-2 rounded-xl border bg-background",
                 "focus:outline-none focus:ring-2 focus:ring-primary",
-                "transition-all duration-200"
+                "transition-all duration-200 text-sm"
               )}
               placeholder="Any additional comments?"
             />
@@ -165,10 +173,10 @@ const InviteForm = () => {
         <motion.button
           type="submit"
           className={cn(
-            "w-full py-4 rounded-xl font-medium text-white",
+            "w-full py-3 rounded-xl font-medium text-white",
             "bg-gradient-to-r from-pink-500 to-orange-500 shadow-lg shadow-pink-500/25",
             "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-            "transition-all duration-300"
+            "transition-all duration-300 text-sm"
           )}
           {...buttonHoverAnimation}
         >

@@ -29,8 +29,8 @@ const Header = ({ title = "Invite" }: HeaderProps) => {
       className={cn(
         "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
         scrolled 
-          ? "py-3 bg-background/80 backdrop-blur-md shadow-sm" 
-          : "py-5 bg-transparent"
+          ? "py-2 bg-background/80 backdrop-blur-md shadow-sm" 
+          : "py-3 bg-transparent"
       )}
     >
       <div className="container max-w-5xl mx-auto px-4 flex items-center justify-between">
@@ -38,10 +38,10 @@ const Header = ({ title = "Invite" }: HeaderProps) => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="p-2 rounded-full text-muted-foreground hover:text-foreground 
+            className="p-1.5 rounded-full text-muted-foreground hover:text-foreground 
                      hover:bg-accent transition-colors duration-200"
           >
-            <PanelLeft size={20} />
+            <PanelLeft size={18} />
           </motion.button>
         </div>
         
@@ -49,7 +49,7 @@ const Header = ({ title = "Invite" }: HeaderProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-lg font-medium"
+          className="text-base font-medium"
         >
           {title}
         </motion.h1>
@@ -57,11 +57,11 @@ const Header = ({ title = "Invite" }: HeaderProps) => {
         <motion.button
           whileHover={{ scale: 1.05, rotate: 15 }}
           whileTap={{ scale: 0.95 }}
-          className="p-2 rounded-full text-muted-foreground hover:text-foreground 
+          className="p-1.5 rounded-full text-muted-foreground hover:text-foreground 
                    hover:bg-accent transition-colors duration-200"
           onClick={() => toast.info("Settings coming soon")}
         >
-          <Settings size={20} />
+          <Settings size={18} />
         </motion.button>
       </div>
     </motion.header>
